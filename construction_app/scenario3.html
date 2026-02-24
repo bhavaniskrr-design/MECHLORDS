@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Scenario 3: Cost Analysis</h2>
+
+<label>Area</label>
+<input id="area" value="2000"><br><br>
+
+<label>Floors</label>
+<input id="floors" value="4"><br><br>
+
+<label>Labour Rate (₹)</label>
+<input id="labour" value="700"><br><br>
+
+<button onclick="calc()">Analyze</button>
+
+<p id="out"></p>
+
+<script>
+function calc(){
+  let area = area.value;
+  let floors = floors.value;
+  let labour = labour.value;
+
+  let builtup = area * floors;
+  let labourCost = builtup * labour;
+  let materialCost = builtup * 1200;
+  let overhead = (labourCost + materialCost) * 0.1;
+
+  let total = labourCost + materialCost + overhead;
+
+  out.innerHTML = `
+  Built-up Area: ${builtup}<br>
+  Material Cost: ₹${materialCost.toLocaleString()}<br>
+  Labour Cost: ₹${labourCost.toLocaleString()}<br>
+  Overhead: ₹${overhead.toLocaleString()}<br><br>
+  <b>Total Cost: ₹${total.toLocaleString()}</b><br>
+  Cost per Sq.Yard: ₹${(total/area).toFixed(0)}
+  `;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Scenario 2: Accelerated Timeline Planning</h2>
+
+<label>Area (sq.yards)</label>
+<input id="area" value="1500"><br><br>
+
+<label>Target Days</label>
+<input id="days" value="90"><br><br>
+
+<button onclick="calc()">Calculate</button>
+
+<p id="out"></p>
+
+<script>
+function calc(){
+  let area = area.value;
+  let days = days.value;
+
+  let baseWorkers = Math.ceil(area / 100);
+  let acceleratedWorkers = baseWorkers + 10;
+
+  let extraCost = acceleratedWorkers * 800 * days;
+
+  out.innerHTML = `
+  Base Workers: ${baseWorkers}<br>
+  Accelerated Workers: ${acceleratedWorkers}<br><br>
+
+  Timeline: ${days} days<br>
+  Cost Impact Due to Acceleration: ₹${extraCost.toLocaleString()}
+  `;
+}
+</script>
+
+</body>
+</html>

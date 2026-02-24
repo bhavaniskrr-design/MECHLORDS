@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scenario 1 – Labour & Materials</title>
+</head>
+<body>
+
+<h2>Scenario 1: Residential G+2 Planning</h2>
+
+<label>Area (sq.yards)</label>
+<input id="area" value="1000"><br><br>
+
+<label>Floors (G+2 = 3)</label>
+<input id="floors" value="3"><br><br>
+
+<button onclick="calc()">Generate Plan</button>
+
+<p id="out"></p>
+
+<script>
+function calc(){
+  let area = area.value;
+  let floors = floors.value;
+  let builtup = area * floors;
+
+  let masons = Math.ceil(builtup / 200);
+  let helpers = masons * 2;
+  let steel = Math.ceil(builtup / 500);
+  let carpenters = Math.ceil(builtup / 600);
+  let supervisors = 1;
+
+  let labourDays = builtup * 1.2;
+  let timeline = Math.ceil(labourDays / 25);
+
+  let cement = builtup * 0.4;
+  let steelQty = builtup * 4;
+
+  out.innerHTML = `
+  Built-up Area: ${builtup}<br><br>
+  <b>Workers</b><br>
+  Masons: ${masons}<br>
+  Helpers: ${helpers}<br>
+  Steel Workers: ${steel}<br>
+  Carpenters: ${carpenters}<br>
+  Supervisors: ${supervisors}<br><br>
+
+  Labour Days: ${labourDays}<br>
+  Estimated Timeline: ${timeline} days<br><br>
+
+  <b>Materials</b><br>
+  Cement: ${cement.toFixed(0)} bags<br>
+  Steel: ${steelQty.toFixed(0)} kg
+  `;
+}
+</script>
+
+</body>
+</html>
