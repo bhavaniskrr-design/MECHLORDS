@@ -1,0 +1,12 @@
+/* ===== Premium Dark Background ===== */
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    background-image: 
+        radial-gradient(circle at 20% 30%, #1e293b 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, #1e3a8a 0%, transparent 40%);
+    min-height: 100vh;
+    color: white;
+}

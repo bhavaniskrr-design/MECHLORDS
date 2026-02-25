@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Construction Planning System</title>
+
+<style>
+
+/* Animated Background */
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(-45deg, #1e3a8a, #2563eb, #0f172a, #334155);
+    background-size: 400% 400%;
+    animation: bg 12s ease infinite;
+    color:white;
+}
+
+@keyframes bg {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container {
+    width: 80%;
+    margin: 40px auto;
+}
+
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+input, select, button {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:none;
+}
+
+button {
+    background:#facc15;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#fbbf24;
+}
+
+pre {
+    background:rgba(0,0,0,0.3);
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Construction Planning System</h1>
+
+<div class="card">
+<select id="scenario">
+<option value="1">Scenario 1 - G+2 Planning</option>
+<option value="2">Scenario 2 - Fast Track</option>
+<option value="3">Scenario 3 - Cost Analysis</option>
+<option value="4">Scenario 4 - Detailed Schedule</option>
+</select>
+
+<input type="number" id="plotSize" placeholder="Plot Size (sq.yards)">
+<input type="number" id="floors" placeholder="Floors (G+?)">
+<input type="number" id="duration" placeholder="Target Duration (optional)">
+<input type="number" id="rate" placeholder="Rate per Sqft (optional)">
+
+<button onclick="generate()">Generate Plan</button>
+</div>
+
+<div class="card">
+<h3>Output</h3>
+<pre id="output"></pre>
+</div>
+
+</div>
+
+<script>
+async function generate() {
+
+    const data = {
+        scenario: document.getElementById("scenario").value,
+        plotSize: Number(document.getElementById("plotSize").value),
+        floors: Number(document.getElementById("floors").value),
+        duration: document.getElementById("duration").value ? Number(document.getElementById("duration").value) : null,
+        ratePerSqft: document.getElementById("rate").value ? Number(document.getElementById("rate").value) : null
+    };
+
+    const response = await fetch("/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    document.getElementById("output").textContent =
+        JSON.stringify(result, null, 2);
+}
+</script>
+
+</body>
+</html>
